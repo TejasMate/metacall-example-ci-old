@@ -15,6 +15,5 @@ jobs:
       - name: Get Latest Release Download URL
         run: |
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
-          echo "Latest MetaCall tarball URL: $url"
-          echo "::set-output name=download_url::$url"  # Store URL as output variable
           wget $url -O metacall-tarball-linux-amd64.tar.gz
+          ls -l
