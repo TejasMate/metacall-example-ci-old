@@ -18,14 +18,3 @@ jobs:
           echo "Latest MetaCall tarball URL: $url"
           echo "::set-output name=download_url::$url"  # Store URL as output variable
           wget $url -O metacall-tarball-linux-amd64.tar.gz
-
-      - name: Download MetaCall Tarball
-        run: |
-          wget {{ url }} -O metacall-tarball-linux-amd64.tar.gz
-
-      - name: Verify Download (Optional)
-        run: |
-          # Add checksum verification step here using tools like sha256sum
-          tree
-          echo "** Download verification steps to be added here **"
-
