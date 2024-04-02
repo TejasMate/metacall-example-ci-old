@@ -26,8 +26,6 @@ jobs:
       - name: Verify Download (Optional)
         run: |
           # Add checksum verification step here using tools like sha256sum
+          ls -l
           echo "** Download verification steps to be added here **"
 
-      - uses: actions/upload-artifact@v3  # Upload the downloaded tarball for caching (optional)
-        with:
-          name: metacall-tarball  # Name of the artifact to upload
