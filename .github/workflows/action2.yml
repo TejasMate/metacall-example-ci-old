@@ -20,7 +20,7 @@ jobs:
 
       - name: Download MetaCall Tarball
         run: |
-          wget $url -O metacall-tarball-linux-amd64.tar.gz
+          wget ${{ url }} -O metacall-tarball-linux-amd64.tar.gz
 
       - name: Verify Download (Optional)
         run: |
