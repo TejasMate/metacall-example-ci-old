@@ -45,7 +45,6 @@ jobs:
           Get-ChildItem
           tar -xf metacall-tarball-win-x64.zip
           dir
-          cd metacall-tarball-win-x64
           metacall.bat
           dir
           metacall
