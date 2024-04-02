@@ -50,7 +50,8 @@ jobs:
         shell: pwsh
         run: |
           git clone https://github.com/metacall/examples.git
-          Start-Process -FilePath "metacall.bat" -Wait -NoNewWindow
+          cd examples
+          Start-Process -FilePath "./metacall.bat" -Wait -NoNewWindow
           dir
 
           
