@@ -23,6 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4  # Checkout the repository code
       - name: Get Latest Release Download
+        shell: pwsh
         run: |
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
