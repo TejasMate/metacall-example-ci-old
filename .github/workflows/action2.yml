@@ -19,7 +19,6 @@ jobs:
           echo "::set-output name=download_url::$url"  # Store URL as output variable
 
       - name: Download MetaCall Tarball
-        if: steps.Get-Latest-Release-Download-URL.outputs.download_url  # Download only if URL is found
         run: |
           wget ${{ steps.Get-Latest-Release-Download-URL.outputs.download_url }} -O metacall-tarball-linux-amd64.tar.gz
 
