@@ -17,7 +17,7 @@ jobs:
           sudo apt update
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
-
+          
           tar -xvzf metacall-tarball-linux-amd64.tar.gz
           ls
           
@@ -50,8 +50,9 @@ jobs:
         shell: pwsh
         run: |
           git clone https://github.com/metacall/examples.git
+          $current_dir_path = Get-Location
           cd examples
-          Start-Process -FilePath "./metacall.bat" -Wait -NoNewWindow
+          Start-Process -FilePath "{$current_dir_path}/metacall.bat" -Wait -NoNewWindow
           dir
 
           
