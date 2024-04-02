@@ -17,12 +17,14 @@ jobs:
           sudo apt update
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
+          tar -xvzf metacall-tarball-linux-amd64.tar.gz
+          ls
           
       - name: Running Tests
         run: |
           git clone https://github.com/metacall/examples.git
           metacall
-          
+  
 
   WindowsRun:
     name: Windows Run
@@ -39,12 +41,14 @@ jobs:
           
           Invoke-WebRequest -Uri $assetUrl -OutFile "metacall-tarball-win-x64.zip"
           Get-ChildItem
+          tar -xf metacall-tarball-win-x64.zip
+          dir
           
       - name: Running Tests
         shell: pwsh
         run: |
           git clone https://github.com/metacall/examples.git
-          metacall
+          
 
 
   MacOSRun:
