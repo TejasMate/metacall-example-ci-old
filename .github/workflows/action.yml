@@ -45,14 +45,14 @@ jobs:
           Get-ChildItem
           tar -xf metacall-tarball-win-x64.zip
           dir
-          Start-Process -FilePath "metacall.bat" -Wait -NoNewWindow
-          dir
           
       - name: Running Tests
         shell: pwsh
         run: |
-          metacall
           git clone https://github.com/metacall/examples.git
+          Start-Process -FilePath "metacall.bat" -Wait -NoNewWindow
+          dir
+
           
 
 
