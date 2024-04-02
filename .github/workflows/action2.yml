@@ -12,10 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3  # Checkout the repository code
 
-      - uses: actions/download-artifact@v3  # Download artifacts from previous jobs (if applicable)
-        with:
-          name: metacall-tarball  # Optional: Name of the artifact containing the downloaded tarball (for caching)
-
       - name: Get Latest Release Download URL
         run: |
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
