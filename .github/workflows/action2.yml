@@ -6,26 +6,23 @@ on:
     branches: [ main ]
 
 jobs:
-  download:
+  LinuxUbuntuRun:
+    name: Linux - Ubuntu Run
     runs-on: ubuntu-latest  # Use a runner compatible with the architecture
-
     steps:
       - uses: actions/checkout@v4  # Checkout the repository code
-
-      - name: Get Latest Release Download URL
+      - name: Get Latest Release Download
         run: |
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
           ls -l
 
-jobs:
-  download:
+  WindowsRun:
+    name: Windows Run
     runs-on: windows-latest  # Use a runner compatible with the architecture
-
     steps:
       - uses: actions/checkout@v4  # Checkout the repository code
-
-      - name: Get Latest Release Download URL
+      - name: Get Latest Release Download
         run: |
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
