@@ -13,22 +13,24 @@ jobs:
 
     - name: Get latest release
       id: get_release
-      uses: actions/github-release@v1
+      uses: actions/github-script@v6
       with:
-        repository: 'metacall/distributable-linux'
-
-    - name: Extract asset URL
-      id: extract_asset_url
-      run: |
-        asset_url=$(echo '${{ steps.get_release.outputs.release.assets.*.browser_download_url }}' | grep 'metacall-tarball-linux-amd64.tar.gz' | head -n 1)
-        echo "::set-output name=asset_url::$asset_url"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const release = await github.repos.getLatestRelease({
+            owner: 'metacall',
+            repo: 'distributable-linux'
+          });
+          const asset = release.data.assets.find(asset => asset.name === 'metacall-tarball-linux-amd64.tar.gz');
+          console.log('Asset URL:', asset.browser_download_url);
+          return asset.browser_download_url;
 
     - name: Download release asset
       uses: actions/download-artifact@v3
       with:
         name: metacall-release
         path: ./release
-        url: ${{ steps.extract_asset_url.outputs.asset_url }}
+        url: ${{ steps.get_release.outputs.result }}
 
     - name: Extract release
       run: |
