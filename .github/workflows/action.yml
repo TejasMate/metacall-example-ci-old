@@ -21,6 +21,7 @@ jobs:
       - name: Running Tests
         run: |
           git clone https://github.com/metacall/examples.git
+          metacall
           
 
   WindowsRun:
@@ -43,6 +44,7 @@ jobs:
         shell: pwsh
         run: |
           git clone https://github.com/metacall/examples.git
+          metacall
 
 
   MacOSRun:
@@ -56,6 +58,7 @@ jobs:
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
           ls -l
+          metacall
 
       - name: Running Tests
         run: |
