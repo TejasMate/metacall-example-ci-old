@@ -17,6 +17,7 @@ jobs:
           sudo apt update
           url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
           wget $url -O metacall-tarball-linux-amd64.tar.gz
+
           tar -xvzf metacall-tarball-linux-amd64.tar.gz
           ls
           
@@ -40,6 +41,7 @@ jobs:
           $assetUrl = $releaseData.assets | Where-Object { $_.name -eq "metacall-tarball-win-x64.zip" } | Select-Object -ExpandProperty browser_download_url
           
           Invoke-WebRequest -Uri $assetUrl -OutFile "metacall-tarball-win-x64.zip"
+          dir
           Get-ChildItem
           tar -xf metacall-tarball-win-x64.zip
           dir
