@@ -20,12 +20,8 @@ jobs:
 
       - name: Download MetaCall Tarball
         if: steps.Get-Latest-Release-Download-URL.outputs.download_url  # Download only if URL is found
-        uses: actions/download-artifact@v3  # Download directly if no previous artifacts, or for redundancy
-        with:
-          name: metacall-tarball  # Name of the artifact to create (optional, for caching)
-        # OR (uncomment if using a separate download step)
-        # run: |
-        #   wget ${{ steps.Get-Latest-Release-Download-URL.outputs.download_url }} -O metacall-tarball-linux-amd64.tar.gz
+        run: |
+          wget ${{ steps.Get-Latest-Release-Download-URL.outputs.download_url }} -O metacall-tarball-linux-amd64.tar.gz
 
       - name: Verify Download (Optional)
         run: |
