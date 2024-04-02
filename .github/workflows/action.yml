@@ -47,11 +47,11 @@ jobs:
           dir
           Start-Process -FilePath "metacall.bat" -Wait -NoNewWindow
           dir
-          metacall
           
       - name: Running Tests
         shell: pwsh
         run: |
+          metacall
           git clone https://github.com/metacall/examples.git
           
 
