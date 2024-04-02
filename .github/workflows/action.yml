@@ -45,7 +45,7 @@ jobs:
           Get-ChildItem
           tar -xf metacall-tarball-win-x64.zip
           dir
-          metacall.bat
+          Start-Process -FilePath "metacall.bat" -Wait -NoNewWindow
           dir
           metacall
           
