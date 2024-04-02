@@ -36,24 +36,27 @@ jobs:
       - name: Get Latest Release Download
         shell: pwsh
         run: |
-          $releaseUrl = "https://api.github.com/repos/metacall/distributable-windows/releases/latest"
-          $releaseData = Invoke-RestMethod -Uri $releaseUrl -UseBasicParsing -Headers @{"Accept"="application/vnd.github+json"} -SkipHttpErrorCheck
-          $assetUrl = $releaseData.assets | Where-Object { $_.name -eq "metacall-tarball-win-x64.zip" } | Select-Object -ExpandProperty browser_download_url
+          # $releaseUrl = "https://api.github.com/repos/metacall/distributable-windows/releases/latest"
+          # $releaseData = Invoke-RestMethod -Uri $releaseUrl -UseBasicParsing -Headers @{"Accept"="application/vnd.github+json"} -SkipHttpErrorCheck
+          # $assetUrl = $releaseData.assets | Where-Object { $_.name -eq "metacall-tarball-win-x64.zip" } | Select-Object -ExpandProperty browser_download_url
           
-          Invoke-WebRequest -Uri $assetUrl -OutFile "metacall-tarball-win-x64.zip"
-          dir
-          Get-ChildItem
-          tar -xf metacall-tarball-win-x64.zip
+          # Invoke-WebRequest -Uri $assetUrl -OutFile "metacall-tarball-win-x64.zip"
+          # dir
+          # Get-ChildItem
+          # tar -xf metacall-tarball-win-x64.zip
+          # dir
+          powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/metacall/install/master/install.ps1')))"
           dir
           
       - name: Running Tests
         shell: pwsh
         run: |
           git clone https://github.com/metacall/examples.git
-          $current_dir_path = Get-Location
-          echo "$current_dir_path/metacall.bat"
-          cd examples/string-manipulation
-          Start-Process -FilePath "$current_dir_path/metacall.bat" -Wait -NoNewWindow | load rb str.rb
+          # $current_dir_path = Get-Location
+          # echo "$current_dir_path/metacall.bat"
+          # cd examples/string-manipulation
+          # Start-Process -FilePath "$current_dir_path/metacall.bat" -Wait -NoNewWindow | load rb str.rb
+          metacall
           dir
 
           
