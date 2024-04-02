@@ -1,37 +1,41 @@
-name: Download Latest Release
+name: Download Latest MetaCall Tarball
 
 on:
-  workflow_dispatch:
+  # Trigger the workflow on push events to the main branch
+  push:
+    branches: [ main ]
 
 jobs:
-  download-release:
-    runs-on: ubuntu-latest
+  download:
+    runs-on: ubuntu-latest  # Use a runner compatible with the architecture
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - uses: actions/checkout@v3  # Checkout the repository code
 
-    - name: Get latest release
-      id: get_release
-      uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const release = await github.repos.getLatestRelease({
-            owner: 'metacall',
-            repo: 'distributable-linux'
-          });
-          const asset = release.data.assets.find(asset => asset.name === 'metacall-tarball-linux-amd64.tar.gz');
-          console.log('Asset URL:', asset.browser_download_url);
-          return asset.browser_download_url;
+      - uses: actions/download-artifact@v3  # Download artifacts from previous jobs (if applicable)
+        with:
+          name: metacall-tarball  # Optional: Name of the artifact containing the downloaded tarball (for caching)
 
-    - name: Download release asset
-      uses: actions/download-artifact@v3
-      with:
-        name: metacall-release
-        path: ./release
-        url: ${{ steps.get_release.outputs.result }}
+      - name: Get Latest Release Download URL
+        run: |
+          url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
+          echo "Latest MetaCall tarball URL: $url"
+          echo "::set-output name=download_url::$url"  # Store URL as output variable
 
-    - name: Extract release
-      run: |
-        tar -xzf ./release/metacall-tarball-linux-amd64.tar.gz
+      - name: Download MetaCall Tarball
+        if: steps.Get-Latest-Release-Download-URL.outputs.download_url  # Download only if URL is found
+        uses: actions/download-artifact@v3  # Download directly if no previous artifacts, or for redundancy
+        with:
+          name: metacall-tarball  # Name of the artifact to create (optional, for caching)
+        # OR (uncomment if using a separate download step)
+        # run: |
+        #   wget ${{ steps.Get-Latest-Release-Download-URL.outputs.download_url }} -O metacall-tarball-linux-amd64.tar.gz
+
+      - name: Verify Download (Optional)
+        run: |
+          # Add checksum verification step here using tools like sha256sum
+          echo "** Download verification steps to be added here **"
+
+      - uses: actions/upload-artifact@v3  # Upload the downloaded tarball for caching (optional)
+        with:
+          name: metacall-tarball  # Name of the artifact to upload
