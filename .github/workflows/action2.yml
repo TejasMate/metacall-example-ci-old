@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest  # Use a runner compatible with the architecture
 
     steps:
-      - uses: actions/checkout@v3  # Checkout the repository code
+      - uses: actions/checkout@v4  # Checkout the repository code
 
       - name: Get Latest Release Download URL
         run: |
@@ -26,6 +26,6 @@ jobs:
       - name: Verify Download (Optional)
         run: |
           # Add checksum verification step here using tools like sha256sum
-          ls -l
+          tree
           echo "** Download verification steps to be added here **"
 
