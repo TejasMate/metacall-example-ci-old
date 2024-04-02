@@ -13,24 +13,16 @@ jobs:
 
     - name: Get latest release
       id: get_release
-      uses: actions/github-script@v6
+      uses: actions/github-release@v1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const release = await github.repos.getLatestRelease({
-            owner: 'metacall',
-            repo: 'distributable-linux'
-          });
-          console.log('Latest release:', release.data.name);
-          console.log('Release URL:', release.data.html_url);
-          return release.data.assets.find(asset => asset.name === 'metacall-tarball-linux-amd64.tar.gz');
+        repository: 'metacall/distributable-linux'
 
     - name: Download release asset
       uses: actions/download-artifact@v3
       with:
         name: metacall-release
         path: ./release
-        url: ${{ steps.get_release.outputs.result.browser_download_url }}
+        url: ${{ steps.get_release.outputs.release.assets.find(asset => asset.name === 'metacall-tarball-linux-amd64.tar.gz').browser_download_url }}
 
     - name: Extract release
       run: |
