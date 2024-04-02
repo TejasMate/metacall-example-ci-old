@@ -51,6 +51,7 @@ jobs:
         run: |
           git clone https://github.com/metacall/examples.git
           $current_dir_path = Get-Location
+          echo "{$current_dir_path}/metacall.bat"
           cd examples
           Start-Process -FilePath "{$current_dir_path}/metacall.bat" -Wait -NoNewWindow
           dir
