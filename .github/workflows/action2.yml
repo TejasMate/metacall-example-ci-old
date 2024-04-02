@@ -25,6 +25,8 @@ jobs:
       - name: Get Latest Release Download
         shell: pwsh
         run: |
-          url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
-          wget $url -O metacall-tarball-linux-amd64.tar.gz
-          dir
+          $releaseUrl = "https://api.github.com/repos/metacall/distributable-linux/releases/latest"
+          $assetUrl = (Invoke-RestMethod -Uri $releaseUrl | ConvertFrom-Json).assets | Where-Object { $_.name -eq "metacall-tarball-linux-amd64.tar.gz" } | Select-Object -ExpandProperty browser_download_url
+          
+          Invoke-WebRequest -Uri $assetUrl -OutFile "metacall-tarball-linux-amd64.tar.gz"
+          Get-ChildItem
