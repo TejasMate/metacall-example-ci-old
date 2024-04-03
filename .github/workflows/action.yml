@@ -21,10 +21,13 @@ jobs:
         run: |
           # git clone https://github.com/metacall/examples.git
           # git clone https://github.com/metacall/examples-testing.git
-          ls -l
           cd examples/url-shortener-example
           metacall pip3 install requests
           metacall main.js
+          echo "print"
+          chmod +x linux-tests.sh
+          ./linux-tests.sh
+
   
 
   WindowsRun:
@@ -42,16 +45,13 @@ jobs:
       - name: Running Tests
         shell: pwsh
         run: |
-          git clone https://github.com/metacall/examples.git
-          # $current_dir_path = Get-Location
-          # echo "$current_dir_path/metacall.bat"
-          # cd examples/string-manipulation
-          # Start-Process -FilePath "$current_dir_path/metacall.bat" -Wait -NoNewWindow | load rb str.rb
-          metacall
-          dir
-
-          
-
+          # git clone https://github.com/metacall/examples.git
+          # git clone https://github.com/metacall/examples-testing.git
+          cd examples/url-shortener-example
+          metacall pip3 install requests
+          metacall main.js
+          echo "print"
+          ./windows-tests.ps1
 
   MacOSRun:
     name: MacOS Run
@@ -61,12 +61,17 @@ jobs:
       
       - name: Get Latest Release Download
         run: |
-          url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
-          wget $url -O metacall-tarball-linux-amd64.tar.gz
-          ls -l
-          metacall
+          curl -sL https://raw.githubusercontent.com/metacall/install/master/install.sh | sh
 
       - name: Running Tests
         run: |
-          git clone https://github.com/metacall/examples.git
+          # git clone https://github.com/metacall/examples.git
+          # git clone https://github.com/metacall/examples-testing.git
+          cd examples/url-shortener-example
+          metacall pip3 install requests
+          metacall main.js
+          echo "print"
+          chmod +x macos-tests.sh
+          ./linux-tests.sh
+
 
