@@ -23,6 +23,7 @@ jobs:
           # git clone https://github.com/metacall/examples-testing.git
           ls -l
           cd examples/url-shortener-example
+          metacall pip3 install requests
           metacall main.js
   
 
