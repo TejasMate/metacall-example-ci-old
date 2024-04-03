@@ -1,4 +1,4 @@
-name: Download Latest MetaCall Tarball
+  name: MetaCall Examples CI
 
 on:
   # Trigger the workflow on push events to the main branch
