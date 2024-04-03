@@ -15,16 +15,13 @@ jobs:
       - name: Get Latest Release Download
         run: |
           sudo apt update
-          url=$(curl -sL https://api.github.com/repos/metacall/distributable-linux/releases/latest | jq -r '.assets[] | select(.name == "metacall-tarball-linux-amd64.tar.gz") | .browser_download_url')
-          wget $url -O metacall-tarball-linux-amd64.tar.gz
-          
-          tar -xvzf metacall-tarball-linux-amd64.tar.gz
-          ls
-          
+          curl -sL https://raw.githubusercontent.com/metacall/install/master/install.sh | sh
+
       - name: Running Tests
         run: |
-          git clone https://github.com/metacall/examples.git
-          metacall
+          # git clone https://github.com/metacall/examples.git
+          # git clone https://github.com/metacall/examples-testing.git
+          metacall examples/string-manipulation/str.rb
   
 
   WindowsRun:
