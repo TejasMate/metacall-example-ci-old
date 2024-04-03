@@ -24,6 +24,8 @@ jobs:
           cd examples/url-shortener-example
           metacall pip3 install requests
           metacall main.js
+          cd ..
+          cd ..
           echo "print"
           chmod +x linux-tests.sh
           ./linux-tests.sh
@@ -50,6 +52,8 @@ jobs:
           cd examples/url-shortener-example
           metacall pip3 install requests
           metacall main.js
+          cd ..
+          cd ..
           echo "print"
           ./windows-tests.ps1
 
@@ -70,6 +74,8 @@ jobs:
           cd examples/url-shortener-example
           metacall pip3 install requests
           metacall main.js
+          cd ..
+          cd ..
           echo "print"
           chmod +x macos-tests.sh
           ./linux-tests.sh
