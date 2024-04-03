@@ -21,7 +21,8 @@ jobs:
         run: |
           # git clone https://github.com/metacall/examples.git
           # git clone https://github.com/metacall/examples-testing.git
-          cd examples/string-manipulation
+          ls -l
+          cd ./examples/string-manipulation
           metacall str.rb
   
 
