@@ -71,6 +71,6 @@ for filename in os.listdir(yaml_dir):
                 expout = expout.replace("\\", "").replace('"', "'")
 
                 if expout in output: print(f"Test Case {script_count} has passed")
-                else: print(f"Test Case {script_count} hasn't passed. \nWarning: {main_output}")
+                else: raise Exception(f"Test Case {script_count} hasn't passed. \nWarning: {main_output}")
 
                 script_count += 1
