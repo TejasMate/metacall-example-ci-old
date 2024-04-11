@@ -15,6 +15,9 @@ jobs:
       - name: Get Latest Release Download
         run: |
           sudo apt update
+          sudo apt-add-repository universe
+          sudo apt install expect
+          export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
           curl -sL https://raw.githubusercontent.com/metacall/install/master/install.sh | sh
 
       - name: Running Tests
