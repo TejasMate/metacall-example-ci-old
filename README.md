@@ -31,6 +31,12 @@ python test.py
 
 The script will iterate through the YAML configuration files in the `examples-testing/test-suits` directory, generate the expect scripts, and run the tests. If all tests pass, you should see a success message for each test case.
 
+## CI Behavior
+
+The `test.py` script is designed to raise an exception if any of the test cases fail. This behavior is useful for integrating the script into a continuous integration (CI) pipeline, where the failure of any test case should cause the build to fail.
+
+If a test case fails, the script will print a message indicating the failed test case(s) and raise an exception with the list of failed test cases
+
 ## Contributing
 
 If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
