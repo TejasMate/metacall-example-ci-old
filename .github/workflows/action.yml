@@ -24,8 +24,6 @@ jobs:
         run: |
           # git clone https://github.com/metacall/examples.git
           # git clone https://github.com/metacall/examples-testing.git
-          cd test-scripts/string-manipulation
-          ls
           python test.py
 
   WindowsRun:
