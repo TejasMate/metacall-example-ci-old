@@ -24,9 +24,7 @@ jobs:
         run: |
           # git clone https://github.com/metacall/examples.git
           # git clone https://github.com/metacall/examples-testing.git
-          metacall pip3 install requests
-          chmod +x linux-tests.sh
-          ./linux-tests.sh
+          python test.py
 
   WindowsRun:
     name: Windows Run
