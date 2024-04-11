@@ -11,7 +11,7 @@ def run_script(script_file):
   return output.decode().strip()
 
 # Get the directory containing the YAML files
-yaml_dir = "example-testing/test-suits"
+yaml_dir = "examples-testing/test-suits"
 
 # Iterate over all YAML files in the directory
 for filename in os.listdir(yaml_dir):
