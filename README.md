@@ -9,7 +9,7 @@ This repository contains a set of automated tests for the "string-manipulation" 
 
 ## Setup
 
-1. Clone the `examples` and 'examples-testing' repository from the MetaCall's GitHub:
+1. Clone the `examples` and `examples-testing` repository from the MetaCall's GitHub:
    ```
    git clone https://github.com/metacall/examples.git
    ```
