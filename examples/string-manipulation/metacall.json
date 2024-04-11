@@ -2,6 +2,6 @@
 	"language_id": "rb",
 	"path": ".",
 	"scripts": [
-		"main.js"
+		"str.rb"
 	]
 }
