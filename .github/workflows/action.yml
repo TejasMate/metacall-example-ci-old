@@ -37,6 +37,7 @@ jobs:
           Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
           Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
           scoop install https://raw.githubusercontent.com/hymkor/expect/master/expect-lua.json
+          expect
           
       - name: Running Tests
         shell: pwsh
