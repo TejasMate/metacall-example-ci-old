@@ -5,7 +5,7 @@ from pathlib import Path
 import subprocess
 
 def run_script(script_file):
-    process = subprocess.Popen(["expect", script_file], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+    process = subprocess.Popen(["expect", script_file, "> log.txt"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
     output, _ = process.communicate()
     return output.decode().strip()
 
@@ -53,6 +53,8 @@ for filename in os.listdir(yaml_dir):
                     f.write(f'sendln("{command}")\n')
                     f.write(f'sendln("exit")\n')
                 main_output = run_script(script_file)
+
+                cat log.txt
 
                 print(main_output)
 
