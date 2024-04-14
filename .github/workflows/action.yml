@@ -15,9 +15,7 @@ jobs:
       - name: Get Latest Release Download
         run: |
           sudo apt update
-          sudo apt-add-repository universe
           sudo apt install expect
-          export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
           curl -sL https://raw.githubusercontent.com/metacall/install/master/install.sh | sh
 
       - name: Running Tests
@@ -36,15 +34,14 @@ jobs:
         shell: pwsh
         run: |
           powershell -NoProfile -ExecutionPolicy unrestricted -Command "[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; &([scriptblock]::Create((Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/metacall/install/master/install.ps1')))"
-          dir
+          scoop install https://raw.githubusercontent.com/hymkor/expect/master/expect-lua.json
           
       - name: Running Tests
         shell: pwsh
         run: |
           # git clone https://github.com/metacall/examples.git
           # git clone https://github.com/metacall/examples-testing.git
-          metacall pip3 install requests
-          ./windows-tests.ps1
+          python windows-tests.py
 
   MacOSRun:
     name: MacOS Run
