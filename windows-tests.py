@@ -54,6 +54,8 @@ for filename in os.listdir(yaml_dir):
                     f.write(f'sendln("exit")\n')
                 main_output = run_script(script_file)
 
+                print(main_output)
+
                 output = main_output.replace(" ", "")
                 strings_to_replace = ['3m', '9m', '[32m', '[39m', '[1G[0J', '[3G', '[3']
                 for string in strings_to_replace:
