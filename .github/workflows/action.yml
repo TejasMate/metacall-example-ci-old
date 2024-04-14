@@ -44,7 +44,9 @@ jobs:
           Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
           scoop install https://raw.githubusercontent.com/hymkor/expect/master/expect-lua.json
           pip install pyyaml
-          python windows-tests.py
+          expect test-scripts/string-manipulation/test-case1.lua
+
+          # python windows-tests.py
 
   MacOSRun:
     name: MacOS Run

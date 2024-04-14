@@ -53,8 +53,11 @@ for filename in os.listdir(yaml_dir):
                     f.write(f'sendln("{command}")\n')
                     f.write(f'sendln("exit")\n')
                 main_output = run_script(script_file)
+                file = open("log.txt", "r")
+                for line in file.readlines():
+                    print(line)
+                file.close()
 
-                cat log.txt
 
                 print(main_output)
 
